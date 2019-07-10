@@ -1,68 +1,78 @@
 #1. Import the NUMPY package under the name np.
-
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
+print(np.__version__)
 
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
-
+a = np.random.random((2,3,5))
+a1 = np.random.uniform(0.0, 5.0, (2,3,5))
+a2 = np.random.randint(5, 9, size = (2,3,5))
 
 
 #4. Print a.
 
-
+print(a)
 
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
+b = np.random.uniform(1, 1, (5, 2, 3))
 
 
 
 #6. Print b.
 
-
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
-
+# print(a.size == b.size)
 
 
 
 #8. Are you able to add a and b? Why or why not?
 
+#print(np.add(a,b)) # Porque no tienen la misma forma.
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
-
+c = b.reshape(2,3,5)
+#print(c.shape)
 
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
-
-
+d = np.add(a,c) # Porque tienen la misma forma
+print(d)
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
-
+# print(a, d) #En a tenemos los valores originales con una matriz de 2 x 3 x5 en d sumamos a la matriz con nueva forma, la diferencia es de 1 en todos los casos
 
 
 
 #12. Multiply a and c. Assign the result to e.
-
-
+e = np.multiply(a,c)
+# print(e)
 
 #13. Does e equal to a? Why or why not?
-
+# print(e == a) # porque cualquier número múltiplicado por uno es igual al mismo número
 
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
-
-
-
+d_max = np.amax(d)
+print(d_max)
+d_min = np.amin(d)
+print(d_min)
+d_mean = np.mean(d)
+print(d_mean)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-
+f = np.empty((2,3,5))
+print(f)
 
 
 """
@@ -75,6 +85,31 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
+for index, ele in enumerate(d):
+  for inde, el in enumerate(ele):
+    for ind, e in enumerate(el):
+        if e > d_min and e < d_mean:
+          f[index, inde, ind] = 25
+        elif e > d_mean and e < d_max:
+          f[index, inde, ind] = 75
+        elif e == d_mean:
+          f[index, inde, ind] = 50
+        elif e == d_min:
+          f[index, inde, ind] = 0
+        elif e == d_max:
+          f[index, inde, ind] = 100
+print(f)
+
+
+'''for index, ele, in enumerate(np.nditer(d)):
+  if '''
+
+
+
+'''for x, y in zip(np.nditer(d), np.nditer(f)):
+  if x > d_min:
+    y = 25
+print(f)'''
 
 
 
@@ -88,7 +123,6 @@ array([[[1.85836099, 1.67064465, 1.62576044, 1.40243961, 1.88454931],
        [[1.44747908, 1.31673383, 1.02000951, 1.52218947, 1.97066381],
         [1.79129243, 1.74983003, 1.96028037, 1.85166831, 1.65450881],
         [1.18068344, 1.9587381 , 1.00656599, 1.93402165, 1.73514584]]])
-
 Your f should be:
 array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 75.,  75.,  25.,  25.,  25.],
@@ -98,7 +132,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 75.,  75.,  75.,  75.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
-
+print(d)
+print(f)
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
@@ -112,3 +147,20 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+g = np.empty((2,3,5), dtype = str)
+
+
+for index, ele in enumerate(d):
+  for inde, el in enumerate(ele):
+    for ind, e in enumerate(el):
+        if e > d_min and e < d_mean:
+          g[index, inde, ind] = 'A'
+        elif e > d_mean and e < d_max:
+          g[index, inde, ind] = 'B'
+        elif e == d_mean:
+          g[index, inde, ind] = "C"
+        elif e == d_min:
+          g[index, inde, ind] = 'D'
+        elif e == d_max:
+          g[index, inde, ind] = 'E'
+print(g)
