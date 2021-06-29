@@ -153,3 +153,31 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+temp = []
+
+for i in d:
+    #print(i)
+    for j in i:
+        #print(j)
+        for x in j:
+            ##print(x)
+            if x > d_min and x < d_mean:
+                temp.append('B')
+                #print("25")
+            elif x > d_mean and x <d_max:
+                 temp.append('D')
+                #print("75")
+            elif x == d_mean:
+                 temp.append('C')
+                #print("50")
+            elif x == d_min:
+                 temp.append('A')
+                #print("0")
+            elif x == d_max:
+                 temp.append('E')
+               # print("100")
+               # 
+
+f = np.reshape(temp,(2,3,5))
+print(f)
+
